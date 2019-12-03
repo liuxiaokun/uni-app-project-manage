@@ -8,7 +8,8 @@
 
 		<scroll-view scroll-y="true">
 			<block v-for="(item, index) in projectData" :key="index">
-				<uni-card :title="item.name" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" :extra="item.remark" :note="item.codeGitUrl" is-shadow="true">
+				<uni-card :title="item.name" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" :extra="item.remark" 
+				:note="item.codeGitUrl" is-shadow="true" @tap="goFunctionPage(item.id)">
 					{{ item.desc }}
 				</uni-card>
 			</block>
@@ -39,7 +40,7 @@ export default {
     },
 	methods: {
 		loadProject() {
-			console.log("laod project")
+			console.log("start load project")
 			uni.request({
 				method: 'GET',
 				url: 'http://192.168.2.246:3333/project',
@@ -49,6 +50,13 @@ export default {
 					this.projectData = dataObj.data;
 				}
 			})
+		},
+		
+		goFunctionPage(projectId) {
+			console.log("click")
+			uni.navigateTo({
+			    url: '../function/function?id=' + projectId
+			});
 		}
 	}
 };
