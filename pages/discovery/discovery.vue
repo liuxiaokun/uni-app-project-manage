@@ -1,22 +1,20 @@
 <template>
-	<view>
-		
+	<view class="page-body">
+		<view class="page-section page-section-gap"><map style="width: 100%; height: 1320rpx;" :latitude="latitude" :longitude="longitude" :markers="covers"></map></view>
 	</view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				
-			}
-		},
-		methods: {
-			
-		}
-	}
+export default {
+	data() {
+		return {
+			title: '百益信科技',
+			latitude: 37.56382,
+			longitude: 121.18263
+		};
+	},
+	methods: {}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -12,12 +12,6 @@
 			</swiper-item>
 		</swiper>
 		
-		<view class="page-body">
-			<view class="page-section page-section-gap">
-				<map style="width: 100%; height: 520px;" :latitude="latitude" :longitude="longitude" :markers="covers">
-				</map>
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -25,9 +19,6 @@
 export default {
 	data() {
 		return {
-			title: '百益信科技',
-			latitude: 37.56382,
-			longitude: 121.18263
 		};
 	},
 	onLoad() {},
