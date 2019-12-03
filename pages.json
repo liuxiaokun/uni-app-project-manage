@@ -21,7 +21,9 @@
         }
         ,{
             "path" : "pages/function/function",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText":"需求列表"
+			}
         }
     ],
 	"tabBar":{

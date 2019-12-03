@@ -40,6 +40,10 @@ export default {
 					console.log(dataObj)
 					this.functionData = dataObj.data;
 					this.pc = dataObj.pc;
+					
+					uni.setNavigationBarTitle({
+						title: 'xxxx'
+					});
 				}
 			});
 		}
