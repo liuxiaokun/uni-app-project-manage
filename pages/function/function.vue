@@ -27,6 +27,7 @@ export default {
 		return {
 			functionIcon: '../../static/function.png',
 			projectId: 0,
+			onlyMe: false,
 			status: 'more',
 			contentText: {
 				contentdown: '上拉加载更多需求',
@@ -42,6 +43,7 @@ export default {
 	},
 	onLoad(option) {
 		this.projectId = option.id;
+		this.onlyMe = option.onlyMe
 		this.loadFunction(option.id);
 		uni.setNavigationBarTitle({
 			title: option.title
@@ -70,7 +72,8 @@ export default {
 					projectId:projectId,
 					scs:'created_date(desc)',
 					s:this.pc.pageSize,
-					p:this.pc.pageIndex
+					p:this.pc.pageIndex,
+					onlyMe: this.onlyMe
 				},
 				dataType: 'JSON',
 				success: res => {
