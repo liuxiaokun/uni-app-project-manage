@@ -39,6 +39,12 @@
 				"navigationBarTitleText":"用户登录"
 			}
         }
+        ,{
+            "path" : "pages/task/task",
+            "style" : {
+				"navigationBarTitleText":"我的任务"
+			}
+        }
     ],
 	"tabBar":{
 		"list":[
@@ -49,7 +55,7 @@
 				"text":"首页"
 			},
 			{
-				"pagePath":"pages/function/function",
+				"pagePath":"pages/task/task",
 				"iconPath":"static/tabBar/my_task_normal.png",
 				"selectedIconPath":"static/tabBar/my_task_selected.png",
 				"text":"任务"

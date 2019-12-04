@@ -10,6 +10,9 @@
 			<uni-list-item title="最后修改时间" :note="functionData.modifiedDate"></uni-list-item>
 			<uni-list-item title="创建人" :note="functionData.createdName"></uni-list-item>
 		</uni-list>
+		<view class="operate">
+			<progress :percent="functionData.completePercent" show-info stroke-width="20" active="true" activeColor="#19be6b" />
+		</view>
 	</view>
 </template>
 
@@ -23,7 +26,7 @@ export default {
 	data() {
 		return {
 			functionId: 0,
-			functionData: {}
+			functionData: {},
 		};
 	},
 	onLoad(option) {
@@ -42,7 +45,7 @@ export default {
 				url: 'http://192.168.2.246:3333/function/' + id,
 				dataType: 'JSON',
 				success: res => {
-					console.log("success")
+					console.log('success');
 					let dataObj = JSON.parse(res.data);
 					this.functionData = dataObj.data;
 				}
@@ -52,4 +55,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.operate {
+	display: flex;
+	flex-direction: row;
+	margin: 22upx;
+}
+</style>

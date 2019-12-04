@@ -92,7 +92,7 @@ export default {
 		goFunctionPage(projectId, title) {
 			console.log('click');
 			uni.navigateTo({
-				url: '/pages/function/function?id=' + projectId + '&title=' + title + '&onlyMe=' + false
+				url: '/pages/function/function?id=' + projectId + '&title=' + title + '&onlyMe=false'
 			});
 		}
 	}
