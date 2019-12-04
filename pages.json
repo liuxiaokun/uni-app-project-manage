@@ -22,7 +22,8 @@
         ,{
             "path" : "pages/function/function",
             "style" : {
-				"navigationBarTitleText":"需求列表"
+				"navigationBarTitleText":"需求列表",
+				"enablePullDownRefresh": true
 			}
         }
     ],

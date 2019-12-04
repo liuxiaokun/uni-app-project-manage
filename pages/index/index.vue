@@ -8,8 +8,8 @@
 
 		<scroll-view scroll-y="true">
 			<block v-for="(item, index) in projectData" :key="index">
-				<uni-card :title="item.name" thumbnail="https://img-cdn-qiniu.dcloud.net.cn/new-page/uni.png" :extra="item.remark" 
-				:note="item.codeGitUrl" is-shadow="true" @tap="goFunctionPage(item.id)">
+				<uni-card :title="item.name" thumbnail="../../static/project.png" :extra="item.remark" 
+				:note="item.codeGitUrl" is-shadow="true" @tap="goFunctionPage(item.id, item.name)">
 					{{ item.desc }}
 				</uni-card>
 			</block>
@@ -52,10 +52,10 @@ export default {
 			})
 		},
 		
-		goFunctionPage(projectId) {
+		goFunctionPage(projectId, title) {
 			console.log("click")
 			uni.navigateTo({
-			    url: '../function/function?id=' + projectId
+			    url: '../function/function?id=' + projectId + '&title=' + title,
 			});
 		}
 	}
