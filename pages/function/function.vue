@@ -26,36 +26,47 @@ export default {
 	data() {
 		return {
 			functionIcon: '../../static/function.png',
-			projectId:0,
+			projectId: 0,
 			status: 'more',
 			contentText: {
-				contentdown: '上拉加载更多',
+				contentdown: '上拉加载更多需求',
 				contentrefresh: '加载中',
-				contentnomore: '没有更多'
+				contentnomore: '没有更多需求了'
 			},
 			pc: {
 				pageIndex: 1,
-				pageSize: 20
+				pageSize: 13
 			},
 			functionData: []
 		};
 	},
 	onLoad(option) {
-		this.projectId = option.id
+		this.projectId = option.id;
 		this.loadFunction(option.id);
 		uni.setNavigationBarTitle({
 			title: option.title
 		});
 	},
+	onReachBottom() {
+		console.log('onReachBottom...');
+		uni.showNavigationBarLoading();
+		this.loadMore(this.projectId, this.pc.pageIndex + 1);
+	},
 	onPullDownRefresh() {
-		this.loadFunction(this.projectId)
+		this.loadFunction(this.projectId);
 		uni.stopPullDownRefresh();
 	},
 	methods: {
 		loadFunction(projectId) {
 			uni.request({
 				method: 'GET',
-				url: 'http://192.168.2.246:3333/function?s=' + this.pc.pageSize + '&p=' + this.pc.pageIndex + '&projectId=' + projectId,
+				url: 'http://192.168.2.246:3333/function',
+				data:{
+					projectId:projectId,
+					scs:'created_date(desc)',
+					s:this.pc.pageSize,
+					p:this.pc.pageIndex
+				},
 				dataType: 'JSON',
 				success: res => {
 					let dataObj = JSON.parse(res.data);
@@ -63,9 +74,40 @@ export default {
 					this.pc = dataObj.pc;
 				}
 			});
+		},
+
+		loadMore(projectId, pageIndex) {
+			console.log('before total:' + this.pc.total + '~length:' + this.functionData.length);
+			if (this.pc.total <= this.functionData.length) {
+				this.status = 'noMore';
+				uni.hideNavigationBarLoading();
+				return;
+			}
+			this.status = 'loading';
+			uni.request({
+				method: 'GET',
+				url: 'http://192.168.2.246:3333/function',
+				data:{
+					projectId:projectId,
+					scs:'created_date(desc)',
+					s:this.pc.pageSize,
+					p:pageIndex
+				},
+				dataType: 'JSON',
+				success: res => {
+					let dataObj = JSON.parse(res.data);
+					this.functionData = this.functionData.concat(dataObj.data);
+					this.pc = dataObj.pc;
+
+					console.log('after total:' + this.pc.total + '~length:' + this.functionData.length);
+					if (this.pc.total <= this.functionData.length) {
+						this.status = 'noMore';
+					}
+					uni.hideNavigationBarLoading();
+				}
+			});
 		}
 	}
 };
 </script>
-<style>
-</style>
+<style></style>
