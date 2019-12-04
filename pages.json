@@ -40,6 +40,12 @@
 				"enablePullDownRefresh": true
 			}
         }
+        ,{
+            "path" : "pages/login/login",
+            "style" : {
+				"navigationBarTitleText":"用户登录"
+			}
+        }
     ],
 	"tabBar":{
 		"list":[

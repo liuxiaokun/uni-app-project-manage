@@ -16,7 +16,8 @@
 					:extra="item.remark"
 					:note="item.codeGitUrl"
 					is-shadow="true"
-					@tap="goFunctionPage(item.id, item.name)">
+					@tap="goFunctionPage(item.id, item.name)"
+				>
 					{{ item.desc }}
 				</uni-card>
 			</block>
@@ -51,6 +52,18 @@ export default {
 		};
 	},
 	onLoad() {
+		uni.getStorage({
+			key: 'token',
+			success: function(res) {
+				console.log('resData:' + res.data);
+				if (!res.data) {
+					uni.reLaunch({
+						url: '/pages/login/login'
+					});
+				}
+			}
+		});
+
 		this.loadProject();
 	},
 

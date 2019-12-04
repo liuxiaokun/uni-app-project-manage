@@ -5,6 +5,7 @@
 			<uni-list-item title="修改密码" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png"></uni-list-item>
 			<uni-list-item title="关于我们" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png"></uni-list-item>
 			<uni-list-item title="联系电话" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png"></uni-list-item>
+			<uni-list-item title="退出" thumb="https://img-cdn-qiniu.dcloud.net.cn/new-page/hx.png" @tap="quit"></uni-list-item>
 		</uni-list>
 	</view>
 </template>
@@ -19,7 +20,14 @@ export default {
 	data() {
 		return {};
 	},
-	methods: {}
+	methods: {
+		quit() {
+			uni.clearStorageSync();
+			uni.reLaunch({
+				url: '/pages/login/login'
+			});
+		}
+	}
 };
 </script>
 
