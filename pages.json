@@ -26,6 +26,13 @@
 				"enablePullDownRefresh": true
 			}
         }
+        ,{
+            "path" : "pages/function/detail/detail",
+            "style" : {
+				"navigationBarTitleText":"需求详情",
+				"enablePullDownRefresh": true
+			}
+        }
     ],
 	"tabBar":{
 		"list":[

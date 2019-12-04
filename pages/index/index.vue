@@ -55,7 +55,7 @@ export default {
 		goFunctionPage(projectId, title) {
 			console.log("click")
 			uni.navigateTo({
-			    url: '../function/function?id=' + projectId + '&title=' + title,
+			    url: '/pages/function/function?id=' + projectId + '&title=' + title,
 			});
 		}
 	}

@@ -2,7 +2,7 @@
 	<view>
 		<view class="uni-list">
 			<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item, index) in functionData" :key="index">
-				<view class="uni-media-list">
+				<view class="uni-media-list" @tap="goFunctionDetail(item.id)">
 					<image class="uni-media-list-logo" :src="functionIcon"></image>
 					<view class="uni-media-list-body">
 						<view class="uni-media-list-text-top">{{ item.name }}</view>
@@ -57,6 +57,11 @@ export default {
 		uni.stopPullDownRefresh();
 	},
 	methods: {
+		goFunctionDetail(functionId) {
+			uni.navigateTo({
+			    url: '/pages/function/detail/detail?id=' + functionId,
+			});
+		},
 		loadFunction(projectId) {
 			uni.request({
 				method: 'GET',
