@@ -26,8 +26,9 @@ export default {
 	data() {
 		return {
 			functionIcon: '../../static/function.png',
-			projectId: 0,
-			onlyMe: false,
+			projectId: '',
+			navTitle:'',
+			onlyMe: true,
 			status: 'more',
 			contentText: {
 				contentdown: '上拉加载更多需求',
@@ -42,11 +43,12 @@ export default {
 		};
 	},
 	onLoad(option) {
-		this.projectId = option.id;
-		this.onlyMe = option.onlyMe
-		this.loadFunction(option.id);
+		this.projectId = option.id ? option.id : '';
+		this.onlyMe = option.onlyMe ? option.onlyMe : true
+		this.navTitle = option.title ? option.title : '需求列表'
+		this.loadFunction(this.projectId);
 		uni.setNavigationBarTitle({
-			title: option.title
+			title: this.navTitle
 		});
 	},
 	onReachBottom() {
@@ -68,6 +70,9 @@ export default {
 			uni.request({
 				method: 'GET',
 				url: 'http://192.168.2.246:3333/function',
+				header:{
+					"Authorization": uni.getStorageSync('token')
+				},
 				data:{
 					projectId:projectId,
 					scs:'created_date(desc)',
