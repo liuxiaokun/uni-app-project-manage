@@ -33,6 +33,13 @@
 				"enablePullDownRefresh": true
 			}
         }
+        ,{
+            "path" : "pages/task/task",
+            "style" : {
+				"navigationBarTitleText":"我的任务",
+				"enablePullDownRefresh": true
+			}
+        }
     ],
 	"tabBar":{
 		"list":[
@@ -41,6 +48,12 @@
 				"iconPath":"static/tabBar/home_normal.png",
 				"selectedIconPath":"static/tabBar/home_selected.png",
 				"text":"首页"
+			},
+			{
+				"pagePath":"pages/task/task",
+				"iconPath":"static/tabBar/my_task_normal.png",
+				"selectedIconPath":"static/tabBar/my_task_selected.png",
+				"text":"任务"
 			},
 			{
 				"pagePath":"pages/discovery/discovery",

@@ -30,6 +30,11 @@ export default {
 		this.functionId = option.id;
 		this.loadFunction(option.id);
 	},
+	onPullDownRefresh() {
+		this.loadFunction(this.functionId);
+		console.log('load finish');
+		uni.stopPullDownRefresh();
+	},
 	methods: {
 		loadFunction(id) {
 			uni.request({
