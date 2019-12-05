@@ -10,14 +10,26 @@
 export default {
 	data() {
 		return {
-			mobile: '18521599183',
-			password: '123456'
+			mobile: '',
+			password: ''
 		};
 	},
 	methods: {
 		login() {
 			console.log(this.mobile);
 			console.log(this.password);
+			if (this.mobile.length !== 11) {
+				uni.showToast({
+					title: '手机号位数不对'
+				});
+				return;
+			}
+			if (this.password.length < 1) {
+				uni.showToast({
+					title: '密码不能为空'
+				});
+				return;
+			}
 
 			uni.request({
 				url: 'http://192.168.2.246:3333/login',
@@ -32,19 +44,23 @@ export default {
 							title: '登陆成功',
 							duration: 1000
 						});
+						let token = res.header.Authorization;
+						console.log('token:' + token);
+						uni.setStorageSync('token', token);
+						uni.reLaunch({
+							url: '/pages/index/index'
+						});
+					} else {
+						uni.showToast({
+							title: '密码错误',
+							duration: 2000
+						});
 					}
-					let token = res.header.Authorization;
-					console.log('token:' + token);
-					uni.setStorageSync('token', token);
-					uni.reLaunch({
-						url: '/pages/index/index'
-					});
 				},
 				fail: () => {
 					console.log('fail');
 					uni.showToast({
-						title: '登陆失败',
-						duration: 2000
+						title: '网络开小差了'
 					});
 				}
 			});

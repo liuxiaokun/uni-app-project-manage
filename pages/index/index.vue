@@ -52,18 +52,14 @@ export default {
 		};
 	},
 	onLoad() {
-		uni.getStorage({
-			key: 'token',
-			success: function(res) {
-				console.log('resData:' + res.data);
-				if (!res.data) {
-					uni.reLaunch({
-						url: '/pages/login/login'
-					});
-				}
-			}
-		});
-
+		const token = uni.getStorageSync('token');
+		console.log('start token:' + token);
+		if (!token) {
+			uni.reLaunch({
+				url: '/pages/login/login'
+			});
+			return
+		}
 		this.loadProject();
 	},
 
