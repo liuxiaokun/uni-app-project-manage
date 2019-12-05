@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import urlConfig from '@/common/config.js'
+
 export default {
 	data() {
 		return {
@@ -16,8 +18,6 @@ export default {
 	},
 	methods: {
 		login() {
-			console.log(this.mobile);
-			console.log(this.password);
 			if (this.mobile.length !== 11) {
 				uni.showToast({
 					title: '手机号位数不对'
@@ -30,9 +30,9 @@ export default {
 				});
 				return;
 			}
-
+			console.log("url:" + urlConfig + 'login')
 			uni.request({
-				url: 'http://192.168.2.246:3333/login',
+				url: urlConfig + 'login',
 				method: 'POST',
 				data: {
 					mobile: this.mobile,

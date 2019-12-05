@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import urlConfig from '@/common/config.js'
 import { uniCard, uniSwiperDot } from '@dcloudio/uni-ui';
 
 export default {
@@ -76,7 +77,7 @@ export default {
 			console.log('start load project');
 			uni.request({
 				method: 'GET',
-				url: 'http://192.168.2.246:3333/project',
+				url: urlConfig + 'project',
 				dataType: 'JSON',
 				success: res => {
 					let dataObj = JSON.parse(res.data);

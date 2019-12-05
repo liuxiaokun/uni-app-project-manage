@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import urlConfig from '@/common/config.js'
 import { uniList, uniListItem } from '@dcloudio/uni-ui';
 export default {
 	components: {
@@ -49,7 +50,7 @@ export default {
 		loadFunction(id) {
 			uni.request({
 				method: 'GET',
-				url: 'http://192.168.2.246:3333/function/' + id,
+				url: urlConfig + 'function/' + id,
 				dataType: 'JSON',
 				success: res => {
 					console.log('success');
@@ -62,14 +63,15 @@ export default {
 		loadFunctionNextState(currentStateId) {
 			uni.request({
 				method: 'GET',
-				url: 'http://192.168.2.246:3333/function/state/next/' + currentStateId,
+				url: urlConfig + 'function/state/next/' + currentStateId,
 				dataType: 'JSON',
 				success: res => {
 					console.log('loadFunctionNextState success' + res.data);
 					let dataObj = JSON.parse(res.data);
 					if (dataObj.success) {
 						if (dataObj.data.id === null || dataObj.data.id === undefined) {
-								this.buttonName = '结束'
+								this.buttonName = '已完成'
+								this.disabled = true
 						} else {
 							this.nextFunctionState = dataObj.data
 							this.buttonName = this.buttonName + dataObj.data.name
@@ -81,7 +83,7 @@ export default {
 		loadUser() {
 			uni.request({
 				method: 'GET',
-				url: 'http://192.168.2.246:3333/user',
+				url: urlConfig + 'user',
 				header: {
 					Authorization: uni.getStorageSync('token')
 				},
@@ -112,7 +114,7 @@ export default {
 					        if (resp.confirm) {
 					            console.log('用户点击确定');
 								uni.request({
-									url: 'http://192.168.2.246:3333/function/' + this.functionData.id,
+									url: urlConfig + 'function/' + this.functionData.id,
 									method: 'POST',
 									data: {
 										id: this.functionData.id,

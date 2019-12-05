@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import urlConfig from '@/common/config.js'
 import { uniTag, uniLoadMore } from '@dcloudio/uni-ui';
 export default {
 	components: {
@@ -69,7 +70,7 @@ export default {
 		loadFunction(projectId) {
 			uni.request({
 				method: 'GET',
-				url: 'http://192.168.2.246:3333/function',
+				url: urlConfig + 'function',
 				header:{
 					"Authorization": uni.getStorageSync('token')
 				},
@@ -99,7 +100,7 @@ export default {
 			this.status = 'loading';
 			uni.request({
 				method: 'GET',
-				url: 'http://192.168.2.246:3333/function',
+				url: urlConfig + 'function',
 				data:{
 					projectId:projectId,
 					scs:'created_date(desc)',

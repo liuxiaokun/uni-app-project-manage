@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import urlConfig from '@/common/config.js'
 import { uniTag, uniLoadMore, uniSwipeAction, uniSwipeActionItem } from '@dcloudio/uni-ui';
 export default {
 	components: {
@@ -82,7 +83,7 @@ export default {
 		loadFunction() {
 			uni.request({
 				method: 'GET',
-				url: 'http://192.168.2.246:3333/function',
+				url: urlConfig + 'function',
 				header: {
 					Authorization: uni.getStorageSync('token')
 				},
@@ -97,6 +98,10 @@ export default {
 					let dataObj = JSON.parse(res.data);
 					this.functionData = dataObj.data;
 					this.pc = dataObj.pc;
+					
+					if(this.pc.total === 0) {
+						this.status = 'noMore';
+					}
 				}
 			});
 		},
@@ -110,7 +115,7 @@ export default {
 			this.status = 'loading';
 			uni.request({
 				method: 'GET',
-				url: 'http://192.168.2.246:3333/function',
+				url: urlConfig + 'function',
 				data: {
 					scs: 'created_date(desc)',
 					s: this.pc.pageSize,
