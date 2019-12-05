@@ -42,7 +42,9 @@
         ,{
             "path" : "pages/task/task",
             "style" : {
-				"navigationBarTitleText":"我的任务"
+				"navigationBarTitleText":"我的任务",
+				"enablePullDownRefresh": true
+				
 			}
         }
     ],

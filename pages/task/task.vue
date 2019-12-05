@@ -2,14 +2,18 @@
 	<view>
 		<view class="uni-list">
 			<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item, index) in functionData" :key="index">
-				<view class="uni-media-list" @tap="goFunctionDetail(item.id)">
-					<image class="uni-media-list-logo" :src="functionIcon"></image>
-					<view class="uni-media-list-body">
-						<view class="uni-media-list-text-top">{{ item.name }}</view>
-						<view class="uni-media-list-text-bottom uni-ellipsis">{{ item.createdDate }}</view>
-					</view>
-					<uni-tag :text="item.currentStateName" type="default"></uni-tag>
-				</view>
+				<uni-swipe-action>
+					<uni-swipe-action-item :options="options" @click="onClick" @change="change">
+						<view class="uni-media-list" @tap="goFunctionDetail(item.id)">
+							<image class="uni-media-list-logo" :src="functionIcon"></image>
+							<view class="uni-media-list-body">
+								<view class="uni-media-list-text-top">{{ item.name }}</view>
+								<view class="uni-media-list-text-bottom uni-ellipsis">{{ item.createdDate }}</view>
+							</view>
+							<uni-tag :text="item.currentStateName" type="default"></uni-tag>
+						</view>
+					</uni-swipe-action-item>
+				</uni-swipe-action>
 			</view>
 		</view>
 		<uni-load-more :status="status" :size="16" :content-text="contentText" />
@@ -17,14 +21,24 @@
 </template>
 
 <script>
-import { uniTag, uniLoadMore } from '@dcloudio/uni-ui';
+import { uniTag, uniLoadMore, uniSwipeAction, uniSwipeActionItem } from '@dcloudio/uni-ui';
 export default {
 	components: {
 		uniTag,
-		uniLoadMore
+		uniLoadMore,
+		uniSwipeAction,
+		uniSwipeActionItem
 	},
 	data() {
 		return {
+			options: [
+				{
+					text: '标记为完成',
+					style: {
+						backgroundColor: '#007aff'
+					}
+				}
+			],
 			functionIcon: '../../static/function.png',
 			status: 'more',
 			contentText: {
@@ -52,22 +66,33 @@ export default {
 		uni.stopPullDownRefresh();
 	},
 	methods: {
+		onClick(e) {
+			console.log('当前点击的是第' + e.index + '个按钮，点击内容是' + e.content.text);
+			uni.showModal({
+				cancelText:'取消',
+				confirmText:'确认',
+				content: '确定标记为完成？'
+			})
+		},
+		change(open) {
+			console.log('当前开启状态：' + open);
+		},
 		goFunctionDetail(functionId) {
 			uni.navigateTo({
-			    url: '/pages/function/detail/detail?id=' + functionId,
+				url: '/pages/function/detail/detail?id=' + functionId
 			});
 		},
 		loadFunction() {
 			uni.request({
 				method: 'GET',
 				url: 'http://192.168.2.246:3333/function',
-				header:{
-					"Authorization": uni.getStorageSync('token')
+				header: {
+					Authorization: uni.getStorageSync('token')
 				},
-				data:{
-					scs:'created_date(desc)',
-					s:this.pc.pageSize,
-					p:this.pc.pageIndex,
+				data: {
+					scs: 'created_date(desc)',
+					s: this.pc.pageSize,
+					p: this.pc.pageIndex,
 					onlyMe: true
 				},
 				dataType: 'JSON',
@@ -90,10 +115,10 @@ export default {
 			uni.request({
 				method: 'GET',
 				url: 'http://192.168.2.246:3333/function',
-				data:{
-					scs:'created_date(desc)',
-					s:this.pc.pageSize,
-					p:pageIndex,
+				data: {
+					scs: 'created_date(desc)',
+					s: this.pc.pageSize,
+					p: pageIndex,
 					onlyMe: true
 				},
 				dataType: 'JSON',
