@@ -50,7 +50,9 @@ export default {
 				pageIndex: 1,
 				pageSize: 13
 			},
-			functionData: []
+			functionData: [],
+			userData:[],
+			userNameData:[]
 		};
 	},
 	onLoad(option) {
@@ -68,11 +70,6 @@ export default {
 	methods: {
 		onClick(e) {
 			console.log('当前点击的是第' + e.index + '个按钮，点击内容是' + e.content.text);
-			uni.showModal({
-				cancelText:'取消',
-				confirmText:'确认',
-				content: '确定标记为完成？'
-			})
 		},
 		change(open) {
 			console.log('当前开启状态：' + open);
@@ -103,7 +100,6 @@ export default {
 				}
 			});
 		},
-
 		loadMore(pageIndex) {
 			console.log('before total:' + this.pc.total + '~length:' + this.functionData.length);
 			if (this.pc.total <= this.functionData.length) {

@@ -36,7 +36,6 @@ export default {
 					let token = res.header.Authorization;
 					console.log('token:' + token);
 					uni.setStorageSync('token', token);
-
 					uni.reLaunch({
 						url: '/pages/index/index'
 					});
