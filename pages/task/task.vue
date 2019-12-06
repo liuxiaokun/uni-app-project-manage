@@ -66,7 +66,6 @@ export default {
 	},
 	onPullDownRefresh() {
 		this.loadFunction();
-		uni.stopPullDownRefresh();
 	},
 	methods: {
 		onClick(e) {
@@ -102,6 +101,9 @@ export default {
 					if(this.pc.total === 0) {
 						this.status = 'noMore';
 					}
+				},
+				complete() {
+					uni.stopPullDownRefresh();
 				}
 			});
 		},

@@ -44,7 +44,6 @@ export default {
 	onPullDownRefresh() {
 		this.loadFunction(this.functionId);
 		console.log('load finish');
-		uni.stopPullDownRefresh();
 	},
 	methods: {
 		loadFunction(id) {
@@ -57,6 +56,9 @@ export default {
 					let dataObj = JSON.parse(res.data);
 					this.functionData = dataObj.data;
 					this.loadFunctionNextState(dataObj.data.currentStateId);
+				},
+				complete() {
+					uni.stopPullDownRefresh();
 				}
 			});
 		},

@@ -67,7 +67,6 @@ export default {
 	onPullDownRefresh() {
 		this.loadProject();
 		console.log('load finish');
-		uni.stopPullDownRefresh();
 	},
 	methods: {
 		change(e) {
@@ -82,6 +81,9 @@ export default {
 				success: res => {
 					let dataObj = JSON.parse(res.data);
 					this.projectData = dataObj.data;
+				},
+				complete() {
+					uni.stopPullDownRefresh();
 				}
 			});
 		},
