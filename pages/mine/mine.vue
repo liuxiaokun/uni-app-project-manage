@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<view style="text-align:center;"><image src="../../static/default_avatar.png" class="avatar"></image></view>
 		<view class="uni-list-cell">
 			<view class="uni-list-cell-left">姓名</view>
 			<view class="val">{{ user.name }}</view>
@@ -9,9 +10,9 @@
 			<view class="uni-list-cell-left">工号</view>
 			<view class="val">{{ user.serialNumber }}</view>
 		</view>
-		
+
 		<view class="uni-list-cell">
-			<view class="uni-list-cell-left">职位</view>
+			<view class="uni-list-cell-left">岗位</view>
 			<view class="val">{{ user.position }}</view>
 		</view>
 
@@ -107,5 +108,12 @@ export default {
 	margin-top: 20px;
 	margin-left: 15px;
 	margin-right: 15px;
+}
+
+.avatar {
+	width: 80px;
+	height: 80px;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 </style>
