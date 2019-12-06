@@ -10,7 +10,15 @@ export default {
 		return {
 			title: '百益信科技',
 			latitude: 37.56382,
-			longitude: 121.18263
+			longitude: 121.18263,
+			covers: [
+				{
+					title:'百益信环保科技有限公司',
+					latitude: 37.56382,
+					longitude: 121.18263,
+					iconPath: '/static/postion_marker.png'
+				}
+			]
 		};
 	},
 	methods: {}
