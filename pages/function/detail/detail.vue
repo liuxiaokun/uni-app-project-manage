@@ -76,7 +76,7 @@ export default {
 								this.disabled = true
 						} else {
 							this.nextFunctionState = dataObj.data
-							this.buttonName = this.buttonName + dataObj.data.name
+							this.buttonName = '标记为 ' + dataObj.data.name
 						}
 					}
 				}
