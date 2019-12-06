@@ -19,6 +19,8 @@
 			<view class="uni-list-cell-left">邮箱</view>
 			<view class="val">{{ user.email }}</view>
 		</view>
+
+		<button type="primary" class="quit" @click="quit()">退出登录</button>
 	</view>
 </template>
 
@@ -27,7 +29,7 @@ import urlConfig from '@/common/config.js';
 export default {
 	data() {
 		return {
-			user:{}
+			user: {}
 		};
 	},
 	onLoad() {
@@ -38,7 +40,7 @@ export default {
 	},
 	methods: {
 		loadUser() {
-			console.log('loadUser')
+			console.log('loadUser');
 			uni.request({
 				url: urlConfig + 'user/info',
 				method: 'GET',
@@ -47,11 +49,11 @@ export default {
 				},
 				data: {},
 				success: res => {
-					console.log(res.data)
+					console.log(res.data);
 					if (res.data.success) {
-						console.log(res.data.data)
+						console.log(res.data.data);
 						let nickName = res.data.data.name;
-						this.user = res.data.data
+						this.user = res.data.data;
 					}
 				},
 				complete() {
@@ -60,9 +62,20 @@ export default {
 			});
 		},
 		quit() {
-			uni.clearStorageSync();
-			uni.reLaunch({
-				url: '/pages/login/login'
+			uni.showModal({
+				title: '操作确认',
+				content: '您确定要退出登录吗？',
+				success: res => {
+					if (res.confirm) {
+						console.debug('用户点击确定');
+						uni.clearStorageSync();
+						uni.reLaunch({
+							url: '/pages/login/login'
+						});
+					} else if (res.cancel) {
+						console.debug('用户点击取消');
+					}
+				}
 			});
 		}
 	}
@@ -83,5 +96,11 @@ export default {
 	padding-right: 15px;
 	font-size: 32upx;
 	color: #808695;
+}
+
+.quit {
+	margin-top: 20px;
+	margin-left: 15px;
+	margin-right: 15px;
 }
 </style>
