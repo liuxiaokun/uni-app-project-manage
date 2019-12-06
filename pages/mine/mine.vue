@@ -9,6 +9,11 @@
 			<view class="uni-list-cell-left">工号</view>
 			<view class="val">{{ user.serialNumber }}</view>
 		</view>
+		
+		<view class="uni-list-cell">
+			<view class="uni-list-cell-left">职位</view>
+			<view class="val">{{ user.position }}</view>
+		</view>
 
 		<view class="uni-list-cell">
 			<view class="uni-list-cell-left">手机号</view>
