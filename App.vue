@@ -4,22 +4,18 @@ export default {
 		console.log('App Launch');
 
 		// #ifdef APP-PLUS
-		console.log('App Launch APP-PLUS');
-		const _handleReceive = function(message) {
-			console.log("_handleReceive: " + message.payload);
+		var info = plus.push.getClientInfo();
+		console.log("device info:" + JSON.stringify( info ) );
+		plus.push.addEventListener('click', message => {
+			console.log('_handleClick:' + JSON.stringify(message));
+		});
+		plus.push.addEventListener('receive', message => {
+			console.log('_handleReceive: ' +JSON.stringify(message));
 			uni.navigateTo({
 				url: message.payload
 			});
-		};
-		const _handleClick = function(message) {
-			console.log("_handleClick:" + message);
-			
-		};
-		plus.push.addEventListener('click', _handleClick);
-		plus.push.addEventListener('receive', _handleReceive);
-		console.log('App Launch APP-PLUS end');
+		});
 		// #endif
-		console.log('App Launch END');
 	},
 	onShow: function() {
 		console.log('App Show');
