@@ -1,13 +1,16 @@
 <template>
 	<view class="content">
-		<view><input type="number" class="uni-input" placeholder="请输入手机号" maxlength="11" confirm-type="next" v-model="mobile" /></view>
-		<view><input password="true" class="uni-input" placeholder="请输入密码" confirm-type="done" v-model="password" /></view>
-		<button class=".button" type="primary" @click="login">登录</button>
+		<view><input type="number" class="uni-input" placeholder="手机号" maxlength="11" confirm-type="next" v-model="mobile" /></view>
+		<view class="line"></view>
+		<view><input password="true" class="uni-input" placeholder="密码" confirm-type="done" v-model="password" /></view>
+		<view class="line"></view>
+		<button class=".button" type="primary" @click="login">确认登录</button>
+		<button class=".wxButton" @click="wxlogin">微信登录</button>
 	</view>
 </template>
 
 <script>
-import urlConfig from '@/common/config.js'
+import urlConfig from '@/common/config.js';
 
 export default {
 	data() {
@@ -30,7 +33,7 @@ export default {
 				});
 				return;
 			}
-			console.log("url:" + urlConfig + 'login')
+			console.log('url:' + urlConfig + 'login');
 			uni.request({
 				url: urlConfig + 'login',
 				method: 'POST',
@@ -71,15 +74,23 @@ export default {
 
 <style>
 .uni-input {
-	width: 100%;
-	margin-left: 3px;
-	margin-right: 3px;
-	height: 50px;
-	line-height: 16px;
-	border-bottom: 1px #2c405a;
+	margin-left: 15px;
+	margin-right: 15px;
+	height: 40px;
+	line-height: 10px;
+	border: none;
 	color: #333333;
 	font-size: 18px;
-	background-color: #efefef;
+}
+
+.line {
+	margin-left: 15px;
+	height: 1px;
+	background-color: #e8eaec;
+	line-height: 1px;
+	clear: both;
+	display: block;
+	overflow: hidden;
 }
 .content {
 	width: 100%;
@@ -90,13 +101,28 @@ export default {
 
 .button {
 	height: 50px;
-	width: 100%;
 	font-size: 18px;
 	font-family: '微软雅黑';
 	font-weight: bold;
 	line-height: 50px;
-	border-radius: 5px;
+	border-radius: 8px;
 	color: #ffffff;
-	background-color: #37b4ca;
+	margin-top: 100px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+.wxButton {
+	height: 50px;
+	font-size: 18px;
+	font-family: '微软雅黑';
+	font-weight: bold;
+	line-height: 50px;
+	border-radius: 8px;
+	color: #ffffff;
+	margin-top: 10px;
+	margin-left: 15px;
+	margin-right: 15px;
+	background: #05be01;
 }
 </style>
