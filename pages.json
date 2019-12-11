@@ -6,6 +6,8 @@
 				"navigationBarTitleText": "首页",
 				"enablePullDownRefresh": true,
 				"app-plus": {
+					// 隐藏滚动条
+					"scrollIndicator": "none",
 					"titleNView": {
 						"buttons": [{
 								"float": "left",
