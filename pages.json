@@ -17,7 +17,8 @@
 								"float": "right",
 								"text": "\ue608",
 								"fontSize": "18px",
-								"fontSrc": "/static/font/iconfont.ttf"
+								"fontSrc": "/static/font/iconfont.ttf",
+								"badgeText": "1"
 							}
 						]
 					}
