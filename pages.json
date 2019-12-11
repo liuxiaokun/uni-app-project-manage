@@ -12,7 +12,7 @@
 						"buttons": [{
 								"float": "left",
 								"text": "\ue651",
-								"fontSize": "20px",
+								"fontSize": "22px",
 								"fontSrc": "/static/font/iconfont.ttf"
 							},
 							{
@@ -22,8 +22,14 @@
 								"fontSrc": "/static/font/iconfont.ttf",
 								"badgeText": "1"
 							}
-						]
+						],
+						"searchInput": {
+							"borderRadius": "5px",
+							"placeholder": "请输入项目名",
+							"disabled": true
+						}
 					}
+
 				}
 			}
 		},
@@ -63,15 +69,14 @@
 				"enablePullDownRefresh": true
 
 			}
-		}
-	    ,{
-            "path" : "pages/message/message",
-            "style" : {
+		}, {
+			"path": "pages/message/message",
+			"style": {
 				"navigationBarTitleText": "消息中心",
 				"enablePullDownRefresh": true
 			}
-        }
-    ],
+		}
+	],
 	"tabBar": {
 		"list": [{
 				"pagePath": "pages/index/index",
