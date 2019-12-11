@@ -18,7 +18,7 @@
 
 		<view class="uni-list-cell">
 			<view class="uni-list-cell-left">手机号</view>
-			<view class="val">{{ user.mobile }}</view>
+			<view class="val" @tap="setClipboard">{{ user.mobile }}</view>
 		</view>
 
 		<view class="uni-list-cell">
@@ -64,6 +64,20 @@ export default {
 				},
 				complete() {
 					uni.stopPullDownRefresh();
+				}
+			});
+		},
+
+		setClipboard() {
+			console.log("clipboard ...");
+			uni.setClipboardData({
+				data: this.user.mobile,
+				success: () => {
+					console.log('success');
+					uni.showToast({
+					    title: '已复制',
+					    duration: 1000
+					});
 				}
 			});
 		},
