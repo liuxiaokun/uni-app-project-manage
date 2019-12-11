@@ -107,6 +107,10 @@ export default {
 			        console.log('条码内容：' + res.result);
 			    }
 			});
+		} else if (button.index === 1) {
+			uni.navigateTo({
+				url: '/pages/message/message'
+			});
 		}
 	}
 };

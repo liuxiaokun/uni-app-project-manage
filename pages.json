@@ -61,7 +61,14 @@
 
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/message/message",
+            "style" : {
+				"navigationBarTitleText": "消息中心",
+				"enablePullDownRefresh": true
+			}
+        }
+    ],
 	"tabBar": {
 		"list": [{
 				"pagePath": "pages/index/index",
