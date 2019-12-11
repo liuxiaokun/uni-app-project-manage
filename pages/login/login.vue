@@ -5,7 +5,7 @@
 		<view><input password="true" class="uni-input" placeholder="密码" confirm-type="done" v-model="password" /></view>
 		<view class="line"></view>
 		<button class=".button" type="primary" @click="login">确认登录</button>
-		<button class=".wxButton" @click="wxlogin">微信登录</button>
+		<!-- <button class=".wxButton" @click="login">微信登录</button> -->
 	</view>
 </template>
 
