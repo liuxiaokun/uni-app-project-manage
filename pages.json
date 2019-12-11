@@ -4,79 +4,91 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"enablePullDownRefresh": true
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+								"float": "left",
+								"text": "\ue651",
+								"fontSize": "20px",
+								"fontSrc": "/static/font/iconfont.ttf"
+							},
+							{
+								"float": "right",
+								"text": "\ue608",
+								"fontSize": "18px",
+								"fontSrc": "/static/font/iconfont.ttf"
+							}
+						]
+					}
+				}
 			}
 		},
 		{
-            "path" : "pages/discovery/discovery",
-            "style" : {
-				"navigationBarTitleText":"发现"
+			"path": "pages/discovery/discovery",
+			"style": {
+				"navigationBarTitleText": "发现"
 			}
-        },
+		},
 		{
-            "path" : "pages/mine/mine",
-            "style" : {
-				"navigationBarTitleText":"我的信息",
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "我的信息",
 				"enablePullDownRefresh": true
 			}
-        }
-        ,{
-            "path" : "pages/function/function",
-            "style" : {
-				"navigationBarTitleText":"需求列表",
+		}, {
+			"path": "pages/function/function",
+			"style": {
+				"navigationBarTitleText": "需求列表",
 				"enablePullDownRefresh": true
 			}
-        }
-        ,{
-            "path" : "pages/function/detail/detail",
-            "style" : {
-				"navigationBarTitleText":"需求详情",
+		}, {
+			"path": "pages/function/detail/detail",
+			"style": {
+				"navigationBarTitleText": "需求详情",
 				"enablePullDownRefresh": true
 			}
-        }
-        ,{
-            "path" : "pages/login/login",
-            "style" : {
-				"navigationBarTitleText":"用户登录"
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "用户登录"
 			}
-        }
-        ,{
-            "path" : "pages/task/task",
-            "style" : {
-				"navigationBarTitleText":"我的任务",
+		}, {
+			"path": "pages/task/task",
+			"style": {
+				"navigationBarTitleText": "我的任务",
 				"enablePullDownRefresh": true
-				
+
 			}
-        }
-    ],
-	"tabBar":{
-		"list":[
-			{
-				"pagePath":"pages/index/index",
-				"iconPath":"static/tabBar/home_normal.png",
-				"selectedIconPath":"static/tabBar/home_selected.png",
-				"text":"首页"
+		}
+	],
+	"tabBar": {
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabBar/home_normal.png",
+				"selectedIconPath": "static/tabBar/home_selected.png",
+				"text": "首页"
 			},
 			{
-				"pagePath":"pages/task/task",
-				"iconPath":"static/tabBar/my_task_normal.png",
-				"selectedIconPath":"static/tabBar/my_task_selected.png",
-				"text":"任务"
+				"pagePath": "pages/task/task",
+				"iconPath": "static/tabBar/my_task_normal.png",
+				"selectedIconPath": "static/tabBar/my_task_selected.png",
+				"text": "任务"
 			},
 			{
-				"pagePath":"pages/discovery/discovery",
-				"iconPath":"static/tabBar/discovery_normal.png",
-				"selectedIconPath":"static/tabBar/discovery_selected.png",
-				"text":"发现"
+				"pagePath": "pages/discovery/discovery",
+				"iconPath": "static/tabBar/discovery_normal.png",
+				"selectedIconPath": "static/tabBar/discovery_selected.png",
+				"text": "发现"
 			},
 			{
-				"pagePath":"pages/mine/mine",
-				"iconPath":"static/tabBar/mine_normal.png",
-				"selectedIconPath":"static/tabBar/mine_selected.png",
-				"text":"我的"
+				"pagePath": "pages/mine/mine",
+				"iconPath": "static/tabBar/mine_normal.png",
+				"selectedIconPath": "static/tabBar/mine_selected.png",
+				"text": "我的"
 			}
 		],
-		"iconWidth":"24px"
+		"iconWidth": "24px"
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

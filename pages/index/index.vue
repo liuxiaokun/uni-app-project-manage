@@ -94,6 +94,20 @@ export default {
 				url: '/pages/function/function?id=' + projectId + '&title=' + title + '&onlyMe=false'
 			});
 		}
+	},
+	
+	onNavigationBarButtonTap(button) {
+		console.log(button.index)
+		
+		if(button.index === 0) {
+			console.log("scan start...")
+			uni.scanCode({
+			    success: function (res) {
+			        console.log('条码类型：' + res.scanType);
+			        console.log('条码内容：' + res.result);
+			    }
+			});
+		}
 	}
 };
 </script>
