@@ -70,6 +70,11 @@ export default {
 
 		setClipboard() {
 			console.log("clipboard ...");
+			uni.vibrateShort({
+			    success: function () {
+			        console.log('vibrate success');
+			    }
+			});
 			uni.setClipboardData({
 				data: this.user.mobile,
 				success: () => {
