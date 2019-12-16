@@ -1,9 +1,9 @@
 {
-    "name" : "team-work",
+    "name" : "tw",
     "appid" : "__UNI__41DDEBD",
     "description" : "",
-    "versionName" : "1.0.0",
-    "versionCode" : "100",
+    "versionName" : "1.0.2",
+    "versionCode" : 102,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -52,7 +52,16 @@
                 ]
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+                "privacyDescription" : {
+                    "NSLocationWhenInUseUsageDescription" : "获取地址位置，为您更便捷的获取公告信息，允许吗？",
+                    "NSCameraUsageDescription" : "需要您的同意才能扫一扫二维码，允许吗？",
+                    "NSPhotoLibraryAddUsageDescription" : "",
+                    "NSPhotoLibraryUsageDescription" : "需要您的同意才能识别图片中二维码，允许吗？",
+                    "NSLocationAlwaysUsageDescription" : "获取地址位置，为您更便捷的获取公告信息，允许吗？",
+                    "NSLocationAlwaysAndWhenInUseUsageDescription" : "获取地址位置，为您更便捷的获取公告信息，允许吗？"
+                }
+            },
             /* SDK配置 */
             "sdkConfigs" : {
                 "maps" : {

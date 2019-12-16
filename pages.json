@@ -76,7 +76,13 @@
 				"enablePullDownRefresh": true
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/scanResut/scanResut",
+            "style" : {
+                "navigationBarTitleText": "扫描结果"
+            }
+        }
+    ],
 	"tabBar": {
 		"list": [{
 				"pagePath": "pages/index/index",

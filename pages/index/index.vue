@@ -105,6 +105,10 @@ export default {
 			    success: function (res) {
 			        console.log('条码类型：' + res.scanType);
 			        console.log('条码内容：' + res.result);
+                    
+                    uni.navigateTo({
+                        url:"/pages/scanResut/scanResut?type=" + res.scanType +"&result=" + res.result,
+                    })
 			    }
 			});
 		} else if (button.index === 1) {
