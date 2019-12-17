@@ -5,7 +5,7 @@
 		<view><input password="true" class="uni-input" placeholder="密码" confirm-type="done" v-model="password" /></view>
 		<view class="line"></view>
 		<button class=".button" type="primary" @click="login">确认登录</button>
-		<!-- <button class=".wxButton" @click="login">微信登录</button> -->
+		<button class=".regist" type="primary" @click="regist">立即注册</button>
 	</view>
 </template>
 
@@ -67,7 +67,17 @@ export default {
 					});
 				}
 			});
-		}
+		},
+        
+        regist() {
+        
+        uni.navigateTo({
+            url: '/pages/regist/regist',
+            success: res => {},
+            fail: () => {},
+            complete: () => {}
+        });
+        }
 	}
 };
 </script>
@@ -112,7 +122,7 @@ export default {
 	margin-right: 15px;
 }
 
-.wxButton {
+.regist {
 	height: 50px;
 	font-size: 18px;
 	font-family: '微软雅黑';
