@@ -92,6 +92,14 @@
                 "navigationBarTitleText": "数据报表"
             }
         }
+        ,{
+            "path" : "pages/video/video",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/audio/audio",
+            "style" : {}
+        }
     ],
     "tabBar": {
         "list": [{

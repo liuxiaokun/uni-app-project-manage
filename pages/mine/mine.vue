@@ -8,7 +8,7 @@
 
 		<view class="uni-list-cell">
 			<view class="uni-list-cell-left">工号</view>
-			<view class="val">{{ user.serialNumber }}</view>
+			<view class="val" @tap="toAudio">{{ user.serialNumber }}</view>
 		</view>
 
 		<view class="uni-list-cell">
@@ -23,7 +23,7 @@
 
 		<view class="uni-list-cell">
 			<view class="uni-list-cell-left">邮箱</view>
-			<view class="val">{{ user.email }}</view>
+			<view class="val" @tap="toVideo">{{ user.email }}</view>
 		</view>
 
 		<button type="primary" class="quit" @click="quit()">退出登录</button>
@@ -90,6 +90,18 @@ export default {
         toDataReport() {
             uni.navigateTo({
                 url: '/pages/dataReport/dataReport'
+            });
+        },
+        
+        toAudio() {
+            uni.navigateTo({
+                url: '/pages/audio/audio'
+            });
+        },
+        
+        toVideo() {
+            uni.navigateTo({
+                url: '/pages/video/video'
             });
         },
         
