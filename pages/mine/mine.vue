@@ -13,7 +13,7 @@
 
 		<view class="uni-list-cell">
 			<view class="uni-list-cell-left">岗位</view>
-			<view class="val">{{ user.position }}</view>
+			<view class="val" @tap="toDataReport">{{ user.position }}</view>
 		</view>
 
 		<view class="uni-list-cell">
@@ -86,6 +86,13 @@ export default {
 				}
 			});
 		},
+        
+        toDataReport() {
+            uni.navigateTo({
+                url: '/pages/dataReport/dataReport'
+            });
+        },
+        
 		quit() {
 			uni.showModal({
 				title: '操作确认',
