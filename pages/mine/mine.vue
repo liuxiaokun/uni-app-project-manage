@@ -89,19 +89,25 @@ export default {
         
         toDataReport() {
             uni.navigateTo({
-                url: '/pages/dataReport/dataReport'
+                url: '/pages/dataReport/dataReport',
+                animationType: 'slide-in-top',
+                animationDuration: 400
             });
         },
         
         toAudio() {
             uni.navigateTo({
-                url: '/pages/audio/audio'
+                url: '/pages/audio/audio',
+                animationType: 'zoom-fade-out',
+                animationDuration: 400
             });
         },
         
         toVideo() {
             uni.navigateTo({
-                url: '/pages/video/video'
+                url: '/pages/video/video',
+                animationType: 'slide-in-bottom',
+                animationDuration: 400
             });
         },
         
