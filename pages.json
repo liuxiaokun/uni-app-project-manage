@@ -25,7 +25,8 @@
                         ],
                         "searchInput": {
                             "borderRadius": "5px",
-                            "placeholder": "请输入项目名"
+                            "placeholder": "请输入项目名",
+                            "disabled": true
                         }
                     }
 

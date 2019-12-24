@@ -54,7 +54,6 @@ export default {
 	},
 	onLoad() {
 		const token = uni.getStorageSync('token');
-		console.log('start token:' + token);
 		if (!token) {
 			uni.reLaunch({
 				url: '/pages/login/login'
@@ -69,10 +68,10 @@ export default {
 		console.log('load finish');
 	},
     
-    onNavigationBarSearchInputConfirmed(e) {
-        console.log(e)
+    onNavigationBarSearchInputClicked() {
+        console.log('onNavigationBarSearchInputClicked')
         uni.navigateTo({
-        	url: '/pages/search/search?value=' + e.text
+        	url: '/pages/search/search'
         });
     },
     
@@ -81,7 +80,6 @@ export default {
 			this.current = e.detail.current;
 		},
 		loadProject() {
-			console.log('start load project');
 			uni.request({
 				method: 'GET',
 				url: urlConfig + 'project',
