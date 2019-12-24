@@ -14,7 +14,7 @@ export default {
     },
     data() {
         return {
-            themeClass: 'block',
+            themeClass: 'circle',
             //语音识别引擎
             speechEngine: 'baidu',
             //初始化推荐列表
