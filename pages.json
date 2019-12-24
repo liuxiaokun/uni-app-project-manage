@@ -25,8 +25,7 @@
                         ],
                         "searchInput": {
                             "borderRadius": "5px",
-                            "placeholder": "请输入项目名",
-                            "disabled": true
+                            "placeholder": "请输入项目名"
                         }
                     }
 
@@ -85,20 +84,26 @@
             "style": {
                 "navigationBarTitleText": "用户注册"
             }
-        }
-        ,{
-            "path" : "pages/dataReport/dataReport",
-            "style" : {
+        }, {
+            "path": "pages/dataReport/dataReport",
+            "style": {
                 "navigationBarTitleText": "数据报表"
             }
-        }
-        ,{
-            "path" : "pages/video/video",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/audio/audio",
-            "style" : {}
+        }, {
+            "path": "pages/video/video",
+            "style": {
+                "navigationBarTitleText": "视频展示"
+            }
+        }, {
+            "path": "pages/audio/audio",
+            "style": {
+                "navigationBarTitleText": "音频展示"
+            }
+        }, {
+            "path": "pages/search/search",
+            "style": {
+                "navigationBarTitleText": "搜索页"
+            }
         }
     ],
     "tabBar": {

@@ -68,6 +68,14 @@ export default {
 		this.loadProject();
 		console.log('load finish');
 	},
+    
+    onNavigationBarSearchInputConfirmed(e) {
+        console.log(e)
+        uni.navigateTo({
+        	url: '/pages/search/search?value=' + e.text
+        });
+    },
+    
 	methods: {
 		change(e) {
 			this.current = e.detail.current;
