@@ -26,6 +26,9 @@ let base = (type, uri, params) => {
             },
             fail() {
                 console.log("fail")
+                uni.showToast({
+                	title: '网络开小差了'
+                });
             },
             complete() {
                 console.log("complete")
