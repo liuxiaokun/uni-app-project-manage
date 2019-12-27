@@ -55,7 +55,7 @@ export default {
 						});
 					} else {
 						uni.showToast({
-							title: '密码错误',
+							title: res.data.message,
 							duration: 2000
 						});
 					}

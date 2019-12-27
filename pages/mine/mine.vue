@@ -8,12 +8,12 @@
 
         <view class="uni-list-cell">
             <view class="uni-list-cell-left">工号</view>
-            <view class="val" @tap="toAudio">{{ user.serialNumber }}</view>
+            <view class="val" @longpress="toAudio">{{ user.serialNumber }}</view>
         </view>
 
         <view class="uni-list-cell">
             <view class="uni-list-cell-left">岗位</view>
-            <view class="val" @tap="toDataReport">{{ user.position }}</view>
+            <view class="val" @longpress="toDataReport">{{ user.position }}</view>
         </view>
 
         <view class="uni-list-cell">
@@ -23,7 +23,7 @@
 
         <view class="uni-list-cell">
             <view class="uni-list-cell-left">邮箱</view>
-            <view class="val" @tap="toVideo">{{ user.email }}</view>
+            <view class="val" @longpress="toVideo">{{ user.email }}</view>
         </view>
 
         <button type="primary" class="quit" @click="quit()">退出登录</button>
