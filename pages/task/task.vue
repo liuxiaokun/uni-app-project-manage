@@ -3,8 +3,8 @@
         <ms-tabs :list="list" v-model="active"></ms-tabs>
         <view class="uni-list">
             <view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item, index) in taskData" :key="index">
-                <uni-swipe-action>
-                    <uni-swipe-action-item :options="options" @click="onClick" @change="change">
+                <!-- <uni-swipe-action>
+                    <uni-swipe-action-item :options="options" @click="onClick" @change="change"> -->
                         <view class="uni-media-list" @tap="goFunctionDetail(item.id)">
                             <image class="uni-media-list-logo" :src="functionIcon"></image>
                             <view class="uni-media-list-body">
@@ -13,8 +13,8 @@
                             </view>
                             <uni-tag :text="item.currentStateName" type="default"></uni-tag>
                         </view>
-                    </uni-swipe-action-item>
-                </uni-swipe-action>
+                    <!-- </uni-swipe-action-item>
+                </uni-swipe-action> -->
             </view>
         </view>
         <uni-load-more :status="status" :size="16" :content-text="contentText" />
