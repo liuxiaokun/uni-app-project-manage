@@ -77,6 +77,7 @@
 						key:'search_cache',
 						success(res){
 							let list = res.data;
+                            console.log("list lenth: " + list.length);
 							if(list.length > 5){
 								for(let item of list){
 									if(item == _this.searchText){
@@ -87,9 +88,9 @@
 								list.pop();
 								list.unshift(_this.searchText);
 							}else{
-								for(let item of list){
-									if(item == _this.searchText){
-										return;
+								for(let i = 0; i < list.length; i++){
+									if(list[i] === _this.searchText){
+                                        list.splice(i, 1)
 									}
 								}
 								list.unshift(_this.searchText);
