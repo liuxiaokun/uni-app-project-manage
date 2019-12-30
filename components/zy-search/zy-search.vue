@@ -147,7 +147,7 @@
 			background-color: #F7F7F7;
 			padding: 10upx 74upx;
 			font-size: 28upx;
-			border-radius: 50upx;
+			border-radius: 15upx;
 		}
 		.voice-icon{
 			width: 36upx;
