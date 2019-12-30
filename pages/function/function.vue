@@ -5,7 +5,7 @@
 				<view class="uni-media-list" @tap="goFunctionDetail(item.id)">
 					<image class="uni-media-list-logo" :src="functionIcon"></image>
 					<view class="uni-media-list-body">
-						<view class="uni-media-list-text-top">{{ item.name }}</view>
+						<view class="uni-media-list-text-top uni-ellipsis">{{ item.name }}</view>
 						<view class="uni-media-list-text-bottom uni-ellipsis">{{ item.createdDate }}</view>
 					</view>
 					<uni-tag :text="item.currentStateName" type="default"></uni-tag>
