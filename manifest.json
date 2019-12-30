@@ -2,8 +2,8 @@
     "name" : "百益项目管制",
     "appid" : "__UNI__41DDEBD",
     "description" : "您得高效管理工具",
-    "versionName" : "1.1.0",
-    "versionCode" : 110,
+    "versionName" : "1.1.1",
+    "versionCode" : 111,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {

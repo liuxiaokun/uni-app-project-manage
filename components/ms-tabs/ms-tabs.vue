@@ -131,17 +131,18 @@ export default {
             color: $uni-text-color;
             &--active {
                 color: $uni-color-primary;
+                font-weight: bold;
             }
             &-title {
-                margin: 0 40rpx;
+                margin: 14rpx 40rpx;
             }
         }
     }
     .tab__line {
         display: block;
-        height: 1rpx;
+        height: 5rpx;
         position: absolute;
-        bottom: 5rpx;
+        bottom: 0rpx;
         left: 0;
         z-index: 1;
         border-radius: 3rpx;
