@@ -3,18 +3,14 @@
         <ms-tabs :list="list" v-model="active"></ms-tabs>
         <view class="uni-list">
             <view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item, index) in taskData" :key="index">
-                <!-- <uni-swipe-action>
-                    <uni-swipe-action-item :options="options" @click="onClick" @change="change"> -->
-                        <view class="uni-media-list" @tap="goFunctionDetail(item.id)">
-                            <image class="uni-media-list-logo" :src="functionIcon"></image>
-                            <view class="uni-media-list-body">
-                                <view class="uni-media-list-text-top">{{ item.name }}</view>
-                                <view class="uni-media-list-text-bottom uni-ellipsis">{{ item.createdDate }}</view>
-                            </view>
-                            <uni-tag :text="item.currentStateName" type="default"></uni-tag>
-                        </view>
-                    <!-- </uni-swipe-action-item>
-                </uni-swipe-action> -->
+                <view class="uni-media-list" @tap="goFunctionDetail(item.id)">
+                    <image class="uni-media-list-logo" :src="nameIcon"></image>
+                    <view class="uni-media-list-body">
+                        <view class="uni-media-list-text-top">{{ item.name }}</view>
+                        <view class="uni-media-list-text-bottom uni-ellipsis">{{ item.createdDate }}</view>
+                    </view>
+                    <uni-tag :text="item.currentStateName" type="default"></uni-tag>
+                </view>
             </view>
         </view>
         <uni-load-more :status="status" :size="16" :content-text="contentText" />
@@ -43,7 +39,7 @@ export default {
                     }
                 }
             ],
-            functionIcon: '../../static/function.png',
+            nameIcon: '../../static/function.png',
             status: 'more',
             contentText: {
                 contentdown: '上拉加载更多',
@@ -65,6 +61,9 @@ export default {
                     title: '缺陷'
                 },
                 {
+                    title: '商务'
+                },
+                {
                     title: '其他'
                 }
             ],
@@ -72,11 +71,7 @@ export default {
         };
     },
     onLoad(option) {
-        if (this.active === 0) {
-            this.loadFunction();
-        } else if (this.active === 1) {
-            this.loadBug();
-        }
+        this.loadTask();
     },
     onReachBottom() {
         console.log('onReachBottom...');
@@ -84,21 +79,33 @@ export default {
         this.loadMore(this.pc.pageIndex + 1);
     },
     onPullDownRefresh() {
-        this.loadFunction();
+        this.loadTask();
     },
     watch: {
         active(newValue, oldValue) {
             console.log('active', newValue, oldValue);
-            this.loadTask();
+            if (newValue === 0) {
+                this.nameIcon = '../../static/function.png';
+                this.loadFunction()
+            } else if (newValue === 1) {
+                this.nameIcon = '../../static/bug.png';
+                this.loadBug()
+            } else {
+                this.taskData = []
+            }
         }
     },
     methods: {
         loadTask() {
+            console.log(this.active)
             if (this.active === 0) {
                 this.loadFunction();
             } else if (this.active === 1) {
                 this.loadBug();
+            } else {
+                this.taskData = [];
             }
+            uni.stopPullDownRefresh()
         },
         onClick(e) {
             console.log('当前点击的是第' + e.index + '个按钮，点击内容是' + e.content.text);
@@ -111,10 +118,9 @@ export default {
                 url: '/pages/function/detail/detail?id=' + functionId
             });
         },
-        loadBug() {
-            this.taskData = [];
-        },
+
         loadFunction() {
+            console.log("load function...")
             uni.request({
                 method: 'GET',
                 url: urlConfig + 'function',
@@ -142,6 +148,37 @@ export default {
                 }
             });
         },
+
+        loadBug() {
+            console.log("load bug...")
+            uni.request({
+                method: 'GET',
+                url: urlConfig + 'bug',
+                header: {
+                    Authorization: uni.getStorageSync('token')
+                },
+                data: {
+                    scs: 'created_date(desc)',
+                    s: this.pc.pageSize,
+                    p: this.pc.pageIndex,
+                    onlyMe: true
+                },
+                dataType: 'JSON',
+                success: res => {
+                    let dataObj = JSON.parse(res.data);
+                    this.taskData = dataObj.data;
+                    this.pc = dataObj.pc;
+
+                    if (this.pc.total === 0) {
+                        this.status = 'noMore';
+                    }
+                },
+                complete() {
+                    uni.stopPullDownRefresh();
+                }
+            });
+        },
+
         loadMore(pageIndex) {
             console.log('before total:' + this.pc.total + '~length:' + this.taskData.length);
             if (this.pc.total <= this.taskData.length) {
