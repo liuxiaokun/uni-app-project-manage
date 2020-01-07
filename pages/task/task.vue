@@ -3,7 +3,7 @@
         <ms-tabs :list="list" v-model="active"></ms-tabs>
         <view class="uni-list">
             <view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item, index) in taskData" :key="index">
-                <view class="uni-media-list" @tap="goFunctionDetail(item.id)">
+                <view class="uni-media-list" @tap="goDetail(item.id)">
                     <image class="uni-media-list-logo" :src="nameIcon"></image>
                     <view class="uni-media-list-body">
                         <view class="uni-media-list-text-top">{{ item.name }}</view>
@@ -39,7 +39,7 @@ export default {
                     }
                 }
             ],
-            nameIcon: '../../static/function.png',
+            nameIcon: '/static/task/function.png',
             status: 'more',
             contentText: {
                 contentdown: '上拉加载更多',
@@ -85,19 +85,19 @@ export default {
         active(newValue, oldValue) {
             console.log('active', newValue, oldValue);
             if (newValue === 0) {
-                this.nameIcon = '../../static/function.png';
-                this.loadFunction()
+                this.nameIcon = '/static/task/function.png';
+                this.loadFunction();
             } else if (newValue === 1) {
-                this.nameIcon = '../../static/bug.png';
-                this.loadBug()
+                this.nameIcon = '/static/task/bug.png';
+                this.loadBug();
             } else {
-                this.taskData = []
+                this.taskData = [];
             }
         }
     },
     methods: {
         loadTask() {
-            console.log(this.active)
+            console.log(this.active);
             if (this.active === 0) {
                 this.loadFunction();
             } else if (this.active === 1) {
@@ -105,7 +105,7 @@ export default {
             } else {
                 this.taskData = [];
             }
-            uni.stopPullDownRefresh()
+            uni.stopPullDownRefresh();
         },
         onClick(e) {
             console.log('当前点击的是第' + e.index + '个按钮，点击内容是' + e.content.text);
@@ -113,14 +113,20 @@ export default {
         change(open) {
             console.log('当前开启状态：' + open);
         },
-        goFunctionDetail(functionId) {
-            uni.navigateTo({
-                url: '/pages/function/detail/detail?id=' + functionId
-            });
+        goDetail(id) {
+            if (this.active === 0) {
+                uni.navigateTo({
+                    url: '/pages/function/detail/detail?id=' + id
+                });
+            } else if (this.active === 1) {
+                uni.navigateTo({
+                    url: '/pages/bug/detail/detail?id=' + id
+                });
+            }
         },
 
         loadFunction() {
-            console.log("load function...")
+            console.log('load function ...');
             uni.request({
                 method: 'GET',
                 url: urlConfig + 'function',
@@ -150,7 +156,7 @@ export default {
         },
 
         loadBug() {
-            console.log("load bug...")
+            console.log('load bug...');
             uni.request({
                 method: 'GET',
                 url: urlConfig + 'bug',

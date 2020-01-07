@@ -1,0 +1,114 @@
+<template>
+    <view>
+        <uni-list>
+            <uni-list-item title="所属需求" :note="bugData.functionName"></uni-list-item>
+            <uni-list-item title="缺陷名称" :note="bugData.name"></uni-list-item>
+            <uni-list-item title="详细描述" :note="bugData.desc"></uni-list-item>
+            <uni-list-item title="当前状态" :note="bugData.currentStateName"></uni-list-item>
+            <uni-list-item title="处理人" :note="bugData.currentHandlePerson"></uni-list-item>
+            <uni-list-item title="责任人" :note="bugData.ownerName"></uni-list-item>
+            <uni-list-item title="创建时间" :note="bugData.createdDate"></uni-list-item>
+            <uni-list-item title="最后修改时间" :note="bugData.modifiedDate"></uni-list-item>
+            <uni-list-item title="创建人" :note="bugData.createdName"></uni-list-item>
+        </uni-list>
+        <view class="operate">
+            <progress :percent="bugData.completePercent" show-info stroke-width="20" active="true" activeColor="#19be6b" />
+            <button :disabled="disabled" type="primary" style="width: 100%; margin-top: 20px;" @tap="markState">{{ buttonName }}</button>
+        </view>
+    </view>
+</template>
+
+<script>
+import urlConfig from '@/common/config.js';
+import { uniList, uniListItem } from '@dcloudio/uni-ui';
+export default {
+    components: {
+    	uniList,
+    	uniListItem
+    },
+    data() {
+        return {
+            disabled: false,
+            bugId: 0,
+            bugData: {},
+            userData: [],
+            userNameData: [],
+            nextFunctionState: {},
+            buttonName: '标记为 '
+        };
+    },
+
+    onLoad(option) {
+        this.bugId = option.id;
+        this.loadBug(option.id);
+        this.loadUser();
+    },
+    onPullDownRefresh() {
+        this.loadBug(this.bugId);
+        console.log('load finish');
+    },
+    methods: {
+        loadBug(id) {
+            uni.request({
+                method: 'GET',
+                url: urlConfig + 'bug/' + id,
+                dataType: 'JSON',
+                success: res => {
+                    console.log('success');
+                    let dataObj = JSON.parse(res.data);
+                    this.bugData = dataObj.data;
+                    this.loadBugNextState(dataObj.data.currentStateId);
+                },
+                complete() {
+                    uni.stopPullDownRefresh();
+                }
+            });
+        },
+
+        loadBugNextState(currentStateId) {
+        	uni.request({
+        		method: 'GET',
+        		url: urlConfig + 'bug/state/next/' + currentStateId,
+        		dataType: 'JSON',
+        		success: res => {
+        			console.log('loadBugNextState success' + res.data);
+        			let dataObj = JSON.parse(res.data);
+        			if (dataObj.success) {
+        				if (dataObj.data.id === null || dataObj.data.id === undefined) {
+        						this.buttonName = '已完成'
+        						this.disabled = true
+        				} else {
+        					this.nextFunctionState = dataObj.data
+        					this.buttonName = '标记为 ' + dataObj.data.name
+        				}
+        			}
+        		}
+        	});
+        },
+        
+        loadUser() {
+            uni.request({
+                method: 'GET',
+                url: urlConfig + 'user',
+                header: {
+                    Authorization: uni.getStorageSync('token')
+                },
+                data: {
+                    scs: 'created_date(desc)'
+                },
+                dataType: 'JSON',
+                success: res => {
+                    let dataObj = JSON.parse(res.data);
+                    this.userData = dataObj.data;
+                    this.userNameData = this.userData.map(item => {
+                        return item.name;
+                    });
+                    console.log(this.userNameData);
+                }
+            });
+        }
+    }
+};
+</script>
+
+<style></style>

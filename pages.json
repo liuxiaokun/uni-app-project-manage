@@ -106,6 +106,18 @@
                 "navigationBarTitleText": "搜索页"
             }
         }
+        ,{
+            "path" : "pages/bug/bug",
+            "style" : {
+                "navigationBarTitleText": "缺陷列表"
+            }
+        }
+        ,{
+            "path" : "pages/bug/detail/detail",
+            "style" : {
+                "navigationBarTitleText": "缺陷详情"
+            }
+        }
     ],
     "tabBar": {
         "list": [{
