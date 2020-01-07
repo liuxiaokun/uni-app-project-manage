@@ -33,7 +33,7 @@ export default {
             bugData: {},
             userData: [],
             userNameData: [],
-            nextFunctionState: {},
+            nextBugState: {},
             buttonName: '标记为 '
         };
     },
@@ -78,7 +78,7 @@ export default {
         						this.buttonName = '已完成'
         						this.disabled = true
         				} else {
-        					this.nextFunctionState = dataObj.data
+        					this.nextBugState = dataObj.data
         					this.buttonName = '标记为 ' + dataObj.data.name
         				}
         			}
@@ -106,6 +106,51 @@ export default {
                     console.log(this.userNameData);
                 }
             });
+        },
+        
+        markState() {
+        	uni.showActionSheet({
+        	    itemList: this.userNameData,
+        	    success: res => {
+        			console.log('choose:' + this.userNameData[res.tapIndex]);
+        			uni.showModal({
+        			    title: '确认指派?',
+        			    content: '您将把任务指派给 ' + this.userNameData[res.tapIndex] + '?',
+        			    success: resp => {
+        			        if (resp.confirm) {
+        			            console.log('用户点击确定');
+        						uni.request({
+        							url: urlConfig + 'bug/' + this.bugData.id,
+        							method: 'POST',
+        							data: {
+        								id: this.bugData.id,
+        								currentStateId: this.nextBugState.id,
+        								currentStateName: this.nextBugState.name,
+        								owner: this.userData[res.tapIndex].id
+        							},
+        							header: {
+        								Authorization: uni.getStorageSync('token')
+        							},
+        							success: response => {
+        								console.log("mark success");
+        								uni.showToast({
+        								    title: '操作成功',
+        								    duration: 1000
+        								});
+        								this.disabled = true
+        							},
+        							fail: () => {},
+        						});
+        			        } else if (resp.cancel) {
+        			            console.log('用户点击取消');
+        			        }
+        			    }
+        			});
+        	    },
+        	    fail: res => {
+        	        console.log(res.errMsg);
+        	    },
+        	});
         }
     }
 };
