@@ -26,7 +26,7 @@ export default {
 	},
 	data() {
 		return {
-			functionIcon: '../../static/function.png',
+			functionIcon: '/static/task/function.png',
 			projectId: '',
 			navTitle:'',
 			onlyMe: true,
