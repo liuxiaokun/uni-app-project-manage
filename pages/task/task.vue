@@ -40,17 +40,28 @@ export default {
                 }
             ],
             nameIcon: '/static/task/function.png',
-            status: 'more',
+            bugstatus: 'more',
+            functionStatus: 'more',
             contentText: {
                 contentdown: '上拉加载更多',
                 contentrefresh: '加载中',
                 contentnomore: '没有更多数据了'
             },
-            pc: {
+            taskData: [],
+            taskPc: {
                 pageIndex: 1,
                 pageSize: 13
             },
-            taskData: [],
+            functionData:[],
+            functionPc: {
+                pageIndex: 1,
+                pageSize: 13
+            },
+            bugData:[],
+            bugPc: {
+                pageIndex: 1,
+                pageSize: 13
+            },
             userData: [],
             userNameData: [],
             list: [
@@ -71,7 +82,12 @@ export default {
         };
     },
     onLoad(option) {
-        this.loadTask();
+        this.loadFunction(1, false)
+        this.loadBug(1, false)
+    },
+    
+    onReady() {
+      this.taskData = this.functionData  
     },
     onReachBottom() {
         console.log('onReachBottom...');
@@ -79,29 +95,31 @@ export default {
         this.loadMore(this.pc.pageIndex + 1);
     },
     onPullDownRefresh() {
-        this.loadTask();
+        this.loadTask(1, false);
     },
     watch: {
         active(newValue, oldValue) {
             console.log('active', newValue, oldValue);
             if (newValue === 0) {
+                this.taskData = this.functionData;
                 this.nameIcon = '/static/task/function.png';
-                this.loadFunction();
+                this.status = this.functionStatus
             } else if (newValue === 1) {
+                this.taskData = this.bugData;
                 this.nameIcon = '/static/task/bug.png';
-                this.loadBug();
+                this.status = this.bugstatus
             } else {
                 this.taskData = [];
             }
         }
     },
     methods: {
-        loadTask() {
+        loadTask(pageIndex, loadMore) {
             console.log(this.active);
             if (this.active === 0) {
-                this.loadFunction();
+                this.loadFunction(pageIndex, loadMore);
             } else if (this.active === 1) {
-                this.loadBug();
+                this.loadBug(pageIndex, loadMore);
             } else {
                 this.taskData = [];
             }
@@ -125,8 +143,8 @@ export default {
             }
         },
 
-        loadFunction() {
-            console.log('load function ...');
+        loadFunction(pageIndex, loadMore) {
+            console.log('load function ...， pageIndex:' + pageIndex);
             uni.request({
                 method: 'GET',
                 url: urlConfig + 'function',
@@ -135,28 +153,33 @@ export default {
                 },
                 data: {
                     scs: 'created_date(desc)',
-                    s: this.pc.pageSize,
-                    p: this.pc.pageIndex,
+                    s: this.functionPc.pageSize,
+                    p: pageIndex,
                     onlyMe: true
                 },
                 dataType: 'JSON',
                 success: res => {
                     let dataObj = JSON.parse(res.data);
-                    this.taskData = dataObj.data;
-                    this.pc = dataObj.pc;
+                    if(loadMore) {
+                        this.functionData = this.functionData.concat(dataObj.data);
+                    } else {
+                        this.functionData = dataObj.data;
+                    }
+                    this.functionPc = dataObj.pc;
 
-                    if (this.pc.total === 0) {
-                        this.status = 'noMore';
+                    if (this.functionPc.total === 0 || this.functionPc.total <= this.functionData.length) {
+                        this.functionStatus = 'noMore';
                     }
                 },
                 complete() {
                     uni.stopPullDownRefresh();
+                    uni.hideNavigationBarLoading();
                 }
             });
         },
 
-        loadBug() {
-            console.log('load bug...');
+        loadBug(pageIndex, loadMore) {
+            console.log('load bug...，pageIndex:' + pageIndex);
             uni.request({
                 method: 'GET',
                 url: urlConfig + 'bug',
@@ -165,18 +188,23 @@ export default {
                 },
                 data: {
                     scs: 'created_date(desc)',
-                    s: this.pc.pageSize,
-                    p: this.pc.pageIndex,
+                    s: this.bugPc.pageSize,
+                    p: pageIndex,
                     onlyMe: true
                 },
                 dataType: 'JSON',
                 success: res => {
                     let dataObj = JSON.parse(res.data);
-                    this.taskData = dataObj.data;
-                    this.pc = dataObj.pc;
+                    
+                    if(loadMore) {
+                        this.bugData = this.bugData.concat(dataObj.data);
+                    } else {
+                        this.bugData = dataObj.data;
+                    }
+                    this.bugPc = dataObj.pc;
 
-                    if (this.pc.total === 0) {
-                        this.status = 'noMore';
+                    if (this.bugPc.total === 0 || this.bugPc.total <= this.bugData.length) {
+                        this.bugstatus = 'noMore';
                     }
                 },
                 complete() {
@@ -193,7 +221,8 @@ export default {
                 return;
             }
             this.status = 'loading';
-            uni.request({
+            this.loadTask(pageIndex, true)
+            /* uni.request({
                 method: 'GET',
                 url: urlConfig + 'function',
                 data: {
@@ -214,7 +243,7 @@ export default {
                     }
                     uni.hideNavigationBarLoading();
                 }
-            });
+            }); */
         }
     }
 };
